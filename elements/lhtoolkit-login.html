@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="lhtoolkit-login">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 300px;
+                height: 300px;
+            }
+        </style>
+        <iron-ajax id="loginAjax" auto url="https://toolkit.librehealth.io/master/ws/rest/v1/session" on-response="handleResponse"></iron-ajax>
+        <img src="https://librehealth.io/img/logo.png" width="300px" />
+        <div id="messageDiv"></div>
+        <paper-input id="userField" label="username"></paper-input>
+        <paper-input id="passwordField" label="password" type="password"></paper-input> <br/>
+        <paper-button raised on-tap="loginCheck" class="indigo">Submit</paper-button>
+    </template>
+    <script>
+        class LhToolkitLogin extends Polymer.Element {
+            static get is() {
+                return 'lhtoolkit-login';
+            }
+
+            handleResponse(e){
+                if(e.detail.response.authenticated){
+                    window.location.href = "https://toolkit.librehealth.io/master/";
+                }
+                else {
+                    if(this.$.userField.value!=undefined){
+                        this.$.messageDiv.textContent = "Please login with correct details";
+                    }
+                }
+            }
+            loginCheck() {
+                var username = this.$.userField.value;
+                var pass = this.$.passwordField.value;
+                this.$.loginAjax.headers['Authorization'] = 'Basic ' + btoa(username +':'+pass);
+                this.$.loginAjax.generateRequest();
+            }
+        }
+        window.customElements.define(LhToolkitLogin.is, LhToolkitLogin);
+    </script>
+</dom-module>

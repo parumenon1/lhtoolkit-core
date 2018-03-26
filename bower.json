@@ -1,0 +1,21 @@
+{
+  "name": "lhtoolkit-core",
+  "description": "Core elements for the lhtoolkit",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-button": "PolymerElements/paper-button",
+    "paper-input": "PolymerElements/paper-input",
+    "iron-ajax": "PolymerElements/iron-ajax"
+
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}
+
